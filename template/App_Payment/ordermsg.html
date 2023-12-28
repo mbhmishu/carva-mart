@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block body_block %}
+<div class="container mt-5">
+  <h2 class="mb-3">
+    Customize your  <span class="text-muted">Product</span>
+  </h2>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card mb-5" style="height: auto">
+        <div class="card-body">
+          <form method="POST">
+            {{form|crispy}}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary float-right">Save Address</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      
+      <br>
+      <br>
+      {% if saved_address.is_fully_filled %}
+      <a href="{% url 'App_Payment:payment' %}" class="btn btn-warning btn-md">Make Payment</a>
+      {% else %}
+      <div class="alert alert-info">
+        <p>Please fill up all the information to make your product</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
